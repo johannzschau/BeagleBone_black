@@ -8,7 +8,7 @@ import os.path
 class Port_I_O:
     
     CHEMIN_GPIO = '/sys/class/gpio'
-
+	""" Constructeur de la classe Port_I_O """
     def __init__(self, gpio_id):
         self.gpio_id = gpio_id
         self.gpio_path = '/'.join([self.CHEMIN_GPIO, 'gpio' + str(self.gpio_id)])
@@ -16,7 +16,7 @@ class Port_I_O:
         if not os.path.exists(self.gpio_path):
          F_tem = open('/'.join([self.CHEMIN_GPIO, 'export']),"w")
          F_tem.write(str(gpio_id))   
-
+	""" méthode pour déclarer la pin en sortie et lui donner une valeur"""
     def Output(self,_id,value): 
         F_tem = open('/'.join([self.CHEMIN_GPIO, 'gpio' + str(self.gpio_id), 'direction']),"w")
         F_tem.write("out")
@@ -24,7 +24,7 @@ class Port_I_O:
         self._id = _id
         F_tem = open('/'.join([self.CHEMIN_GPIO, 'gpio' + str(self._id), 'value']),"w")
         F_tem.write(str(value))
-        
+     """ méthode pour déclarer la pin en entrée et lire sa valeur"""   
     def Intput(self,_id): 
         F_tem = open('/'.join([self.CHEMIN_GPIO, 'gpio' + str(self.gpio_id), 'direction']),"w")
         F_tem.write("in")
@@ -33,7 +33,7 @@ class Port_I_O:
         value = F_tem.read()
         return value.rstrip()
       
-          
+    """ MAIN """      
 if __name__ == "__main__":
     chiffre = 0
     print('!!!!!!!!!!!!!!!!!\n programme V 1.4.5\n!!!!!!!!!!!!!!!!!')
